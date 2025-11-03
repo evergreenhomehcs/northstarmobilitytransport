@@ -162,43 +162,49 @@
   <p>&copy; <span id="yr"></span> North Star Mobility Transport LLC • All rights reserved.</p>
 </footer>
 
+
 <script>
   // Year
-  document.getElementById('yr').textContent=new Date().getFullYear();
+  document.getElementById('yr').textContent = new Date().getFullYear();
 
   // Simple slider (auto-scroll + dots)
-  const track=document.getElementById('slides');
-  const dotsWrap=document.getElementById('dots');
-  const imgs=Array.from(track.querySelectorAll('img'));
-  imgs.forEach((_,i)=>{const d=document.createElement('span');d.className='dot'+(i==0?' active':'');dotsWrap.appendChild(d)});
-  const dots=[...dotsWrap.children];
-  let idx=0;
+  const track = document.getElementById('slides');
+  const dotsWrap = document.getElementById('dots');
+  const imgs = Array.from(track.querySelectorAll('img'));
+  imgs.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsWrap.appendChild(d);
+  });
+  const dots = [...dotsWrap.children];
+  let idx = 0;
+
   function go(n){
-    idx=(n+imgs.length)%imgs.length;
-    const x = imgs.slice(0,idx).reduce((w,el)=>w+el.getBoundingClientRect().width,0);
-    track.style.transform=`translateX(${-x}px)`;
-    dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+    idx = (n + imgs.length) % imgs.length;
+    const x = imgs.slice(0, idx).reduce((w, el) => w + el.getBoundingClientRect().width, 0);
+    track.style.transform = `translateX(${-x}px)`;   // ✅ backticks fixed
+    dots.forEach((d,i) => d.classList.toggle('active', i === idx));
   }
-  function next(){go(idx+1)}
-  let timer=setInterval(next,3500);
-  track.addEventListener('mouseenter',()=>clearInterval(timer));
-  track.addEventListener('mouseleave',()=>timer=setInterval(next,3500));
-  window.addEventListener('load',()=>go(0));
+  function next(){ go(idx + 1); }
+  let timer = setInterval(next, 3500);
+  track.addEventListener('mouseenter', () => clearInterval(timer));
+  track.addEventListener('mouseleave', () => (timer = setInterval(next, 3500)));
+  window.addEventListener('load', () => go(0));
 
   // Mailto fallback form
-  document.getElementById('rideForm').addEventListener('submit',e=>{
+  document.getElementById('rideForm').addEventListener('submit', e => {
     e.preventDefault();
-    const f=new FormData(e.target);
-    const lines=[
+    const f = new FormData(e.target);
+    const lines = [
       `Name: ${f.get('name')}`,
       `Phone: ${f.get('phone')}`,
       `Pickup: ${f.get('pickup')}`,
       `Drop-off: ${f.get('dropoff')}`,
-      `Notes: ${f.get('notes')||''}`
+      `Notes: ${f.get('notes') || ''}`
     ].join('%0D%0A');
-    const to='northstarmobilitytransport@gmail.com';
-    const subj=encodeURIComponent('Ride Request from Website');
-    location.href=`mailto:${to}?subject=${subj}&body=${lines}`;
+    const to = 'northstarmobilitytransport@gmail.com';
+    const subj = encodeURIComponent('Ride Request from Website');
+    location.href = `mailto:${to}?subject=${subj}&body=${lines}`;  // ✅ backticks fixed
     e.target.reset();
   });
 </script>
