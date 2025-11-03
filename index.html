@@ -30,7 +30,7 @@
     .btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
     /* Slider */
     .slider{position:relative;height:260px;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.2)}
-    .slides{display:flex;height:100%;width:max-content}
+    .slides{display:flex;height:100%;width:max-content;transition:transform .5s ease}
     .slides img{height:100%;width:auto;flex:0 0 auto;object-fit:cover}
     .dots{position:absolute;left:0;right:0;bottom:.5rem;display:flex;justify-content:center;gap:.35rem}
     .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.5)}
@@ -48,7 +48,7 @@
     /* Footer */
     footer{background:var(--navy);color:#cbd5e1;padding:1.25rem;text-align:center;margin-top:2rem}
     .icons i{font-size:1.2rem;margin:0 .4rem}
-    /* Responsive tune */
+    /* Responsive */
     @media (min-width:900px){
       .hero-inner{grid-template-columns:1.1fr .9fr;align-items:center}
       .slider{height:320px}
@@ -59,7 +59,6 @@
 
 <header>
   <a class="brand" href="#">
-    <!-- Simple SVG logo you own -->
     <svg viewBox="0 0 160 160" aria-label="North Star">
       <circle cx="80" cy="80" r="78" fill="#1e7f5c" />
       <polygon points="80,18 92,68 142,68 100,98 116,142 80,115 44,142 60,98 18,68 68,68"
@@ -85,16 +84,17 @@
         <a class="btn alt" href="mailto:northstarmobilitytransport@gmail.com?subject=Ride%20Request"><i class="fa-solid fa-envelope"></i> Email</a>
       </div>
     </div>
+
     <div class="slider" aria-label="Vehicle slideshow">
       <div class="slides" id="slides">
-        <!-- swap these with your own files later: /assets/van1.jpg ... van7.jpg -->
-        <img src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-wheelchair-van.jpg" alt="Wheelchair van front view">
-        <img src="https://www.driverge.com/wp-content/uploads/2022/03/driverge-nemt-van.jpg" alt="Accessible van">
-        <img src="https://www.paulsherryconversionvans.com/wp-content/uploads/2020/07/medical-transport-van.jpg" alt="Medical transport van">
-        <img src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-gurney-van.jpg" alt="Gurney-capable vehicle">
-        <img src="https://www.driverge.com/wp-content/uploads/2022/03/driverge-high-roof-van.jpg" alt="High-roof van">
-        <img src="https://www.paulsherryconversionvans.com/wp-content/uploads/2020/07/wheelchair-access-van.jpg" alt="Rear-ramp van">
-        <img src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-rear-ramp-van.jpg" alt="Rear-ramp view">
+        <!-- For best reliability, host your own files in /assets and replace these URLs. -->
+        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-wheelchair-van.jpg" alt="Wheelchair van front view">
+        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.driverge.com/wp-content/uploads/2022/03/driverge-nemt-van.jpg" alt="Accessible van">
+        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.paulsherryconversionvans.com/wp-content/uploads/2020/07/medical-transport-van.jpg" alt="Medical transport van">
+        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-gurney-van.jpg" alt="Gurney-capable vehicle">
+        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.driverge.com/wp-content/uploads/2022/03/driverge-high-roof-van.jpg" alt="High-roof van">
+        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.paulsherryconversionvans.com/wp-content/uploads/2020/07/wheelchair-access-van.jpg" alt="Rear-ramp van">
+        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-rear-ramp-van.jpg" alt="Rear-ramp view">
       </div>
       <div class="dots" id="dots" aria-hidden="true"></div>
     </div>
@@ -162,7 +162,6 @@
   <p>&copy; <span id="yr"></span> North Star Mobility Transport LLC • All rights reserved.</p>
 </footer>
 
-
 <script>
   // Year
   document.getElementById('yr').textContent = new Date().getFullYear();
@@ -182,7 +181,7 @@
   function go(n){
     idx = (n + imgs.length) % imgs.length;
     const x = imgs.slice(0, idx).reduce((w, el) => w + el.getBoundingClientRect().width, 0);
-    track.style.transform = `translateX(${-x}px)`;   // ✅ backticks fixed
+    track.style.transform = `translateX(${-x}px)`;   // fixed backticks
     dots.forEach((d,i) => d.classList.toggle('active', i === idx));
   }
   function next(){ go(idx + 1); }
@@ -204,7 +203,7 @@
     ].join('%0D%0A');
     const to = 'northstarmobilitytransport@gmail.com';
     const subj = encodeURIComponent('Ride Request from Website');
-    location.href = `mailto:${to}?subject=${subj}&body=${lines}`;  // ✅ backticks fixed
+    location.href = `mailto:${to}?subject=${subj}&body=${lines}`;  // fixed backticks
     e.target.reset();
   });
 </script>
