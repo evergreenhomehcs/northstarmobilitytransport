@@ -8,51 +8,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{
-      --navy:#002b5c; --emerald:#1e7f5c; --gold:#f5b700; --ink:#1b1f23; --paper:#f5f7fb; --white:#fff;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--paper)}
-    a{color:inherit}
-    /* Header */
+    :root { --navy:#002b5c; --emerald:#1e7f5c; --gold:#f5b700; --ink:#1b1f23; --paper:#f5f7fb; --white:#fff; }
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--paper)} a{color:inherit}
     header{position:sticky;top:0;z-index:50;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem}
-    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--white)}
-    .brand svg{height:40px;width:auto}
+    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--white)} .brand svg{height:40px;width:auto}
     nav a{color:var(--white);text-decoration:none;margin-left:1rem;font-weight:600}
-    /* Hero */
     .hero{position:relative;background:var(--navy);color:var(--white);overflow:hidden}
     .hero-inner{max-width:1100px;margin:0 auto;padding:2.5rem 1rem;display:grid;gap:1.25rem;grid-template-columns:1fr}
-    .hero h1{margin:0;font-size:clamp(1.7rem,3vw,2.4rem)}
-    .hero p{margin:.25rem 0 1rem;opacity:.95}
-    .cta{display:flex;flex-wrap:wrap;gap:.6rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid transparent}
-    .btn.call{background:var(--emerald);color:var(--white)}
-    .btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
-    /* Slider */
-    .slider{position:relative;height:260px;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.2)}
+    .hero h1{margin:0;font-size:clamp(1.7rem,3vw,2.4rem)} .hero p{margin:.25rem 0 1rem;opacity:.95}
+    .cta{display:flex;flex-wrap:wrap;gap:.6rem} .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid transparent}
+    .btn.call{background:var(--emerald);color:var(--white)} .btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
+    .slider{position:relative;height:260px;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.2);background:linear-gradient(135deg,var(--navy),var(--emerald))}
     .slides{display:flex;height:100%;width:max-content;transition:transform .5s ease}
-    .slides img{height:100%;width:auto;flex:0 0 auto;object-fit:cover}
+    .slides img{height:100%;width:100vw;max-width:1100px;flex:0 0 100%;object-fit:cover;object-position:center}
     .dots{position:absolute;left:0;right:0;bottom:.5rem;display:flex;justify-content:center;gap:.35rem}
-    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.5)}
-    .dot.active{background:var(--gold)}
-    /* Sections */
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.5)} .dot.active{background:var(--gold)}
     section{max-width:1100px;margin:0 auto;padding:2rem 1rem}
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
-    .card{background:var(--white);border-radius:16px;padding:1.25rem;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-    .card h3{margin:.2rem 0 .6rem}
-    /* Form */
-    form{display:grid;gap:.75rem}
-    input,textarea,select{width:100%;padding:.8rem;border:1px solid #d9e1ec;border-radius:10px;background:#fff}
-    button{cursor:pointer}
-    .btn.primary{background:var(--navy);color:#fff;border:none}
-    /* Footer */
-    footer{background:var(--navy);color:#cbd5e1;padding:1.25rem;text-align:center;margin-top:2rem}
-    .icons i{font-size:1.2rem;margin:0 .4rem}
-    /* Responsive */
-    @media (min-width:900px){
-      .hero-inner{grid-template-columns:1.1fr .9fr;align-items:center}
-      .slider{height:320px}
-    }
+    .card{background:var(--white);border-radius:16px;padding:1.25rem;box-shadow:0 6px 18px rgba(0,0,0,.08)} .card h3{margin:.2rem 0 .6rem}
+    form{display:grid;gap:.75rem} input,textarea,select{width:100%;padding:.8rem;border:1px solid #d9e1ec;border-radius:10px;background:#fff} .btn.primary{background:var(--navy);color:#fff;border:none}
+    footer{background:var(--navy);color:#cbd5e1;padding:1.25rem;text-align:center;margin-top:2rem} .icons i{font-size:1.2rem;margin:0 .4rem}
+    @media (min-width:900px){ .hero-inner{grid-template-columns:1.1fr .9fr;align-items:center} .slider{height:320px} }
   </style>
 </head>
 <body>
@@ -61,8 +37,7 @@
   <a class="brand" href="#">
     <svg viewBox="0 0 160 160" aria-label="North Star">
       <circle cx="80" cy="80" r="78" fill="#1e7f5c" />
-      <polygon points="80,18 92,68 142,68 100,98 116,142 80,115 44,142 60,98 18,68 68,68"
-               fill="#f5b700"/>
+      <polygon points="80,18 92,68 142,68 100,98 116,142 80,115 44,142 60,98 18,68 68,68" fill="#f5b700"/>
     </svg>
     <strong>North Star Mobility Transport</strong>
   </a>
@@ -87,14 +62,13 @@
 
     <div class="slider" aria-label="Vehicle slideshow">
       <div class="slides" id="slides">
-        <!-- For best reliability, host your own files in /assets and replace these URLs. -->
-        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-wheelchair-van.jpg" alt="Wheelchair van front view">
-        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.driverge.com/wp-content/uploads/2022/03/driverge-nemt-van.jpg" alt="Accessible van">
-        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.paulsherryconversionvans.com/wp-content/uploads/2020/07/medical-transport-van.jpg" alt="Medical transport van">
-        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-gurney-van.jpg" alt="Gurney-capable vehicle">
-        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.driverge.com/wp-content/uploads/2022/03/driverge-high-roof-van.jpg" alt="High-roof van">
-        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.paulsherryconversionvans.com/wp-content/uploads/2020/07/wheelchair-access-van.jpg" alt="Rear-ramp van">
-        <img referrerpolicy="no-referrer" loading="lazy" src="https://www.sunsetvans.com/wp-content/uploads/2021/09/white-rear-ramp-van.jpg" alt="Rear-ramp view">
+        <img loading="lazy" src="images/hero-1.jpg" alt="North Star Mobility Transport hero">
+        <img loading="lazy" src="images/van-exterior.jpg" alt="Accessible van exterior">
+        <img loading="lazy" src="images/rear-ramp.jpg" alt="Rear ramp access">
+        <img loading="lazy" src="images/high-roof.jpg" alt="High roof van">
+        <img loading="lazy" src="images/service-wheelchair.jpg" alt="Wheelchair transport">
+        <img loading="lazy" src="images/service-door-to-door.jpg" alt="Door-to-door help">
+        <img loading="lazy" src="images/service-safety.jpg" alt="Safety standards">
       </div>
       <div class="dots" id="dots" aria-hidden="true"></div>
     </div>
@@ -106,18 +80,22 @@
     <div class="card">
       <h3><i class="fa-solid fa-wheelchair-move"></i> Wheelchair Transport</h3>
       <p>Securements, ramps, and patient-first assistance for medical appointments, hospital discharges, dialysis, rehab, and more.</p>
+      <img src="images/service-wheelchair.jpg" alt="Wheelchair transport" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3><i class="fa-solid fa-door-open"></i> Door-to-Door Help</h3>
       <p>From door to vehicle and into the facility—steady support from trained drivers who respect dignity and privacy.</p>
+      <img src="images/service-door-to-door.jpg" alt="Door to door help" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3><i class="fa-solid fa-clock"></i> On-Time & Reliable</h3>
       <p>Clear ETAs and communication. We plan routes to keep you on schedule.</p>
+      <img src="images/service-on-time.jpg" alt="On-time and reliable" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3><i class="fa-solid fa-shield-heart"></i> Safety Standards</h3>
       <p>Daily vehicle inspections, clean interiors, and securement procedures aligned with MnDOT STS requirements.</p>
+      <img src="images/service-safety.jpg" alt="Safety standards" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
   </div>
 </section>
@@ -141,6 +119,7 @@
       <p><strong>Phone:</strong> (320) 469-7560 &nbsp;|&nbsp; (320) 492-2104<br>
          <strong>Email:</strong> northstarmobilitytransport@gmail.com</p>
       <p><strong>Address:</strong> 16386 Ellerdale Ln, Eden Prairie, MN 55346</p>
+      <img src="images/contact-banner.jpg" alt="Contact banner" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3>Service Area</h3>
@@ -157,7 +136,7 @@
   <div class="icons" aria-label="Social links">
     <i class="fa-brands fa-facebook"></i>
     <i class="fa-brands fa-instagram"></i>
-    <i class="fa-brands fa-linkedin"></i>
+    <i class="fa-brands fa-linkedIn"></i>
   </div>
   <p>&copy; <span id="yr"></span> North Star Mobility Transport LLC • All rights reserved.</p>
 </footer>
@@ -166,7 +145,7 @@
   // Year
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // Simple slider (auto-scroll + dots)
+  // Slider (auto-scroll + dots)
   const track = document.getElementById('slides');
   const dotsWrap = document.getElementById('dots');
   const imgs = Array.from(track.querySelectorAll('img'));
@@ -180,8 +159,7 @@
 
   function go(n){
     idx = (n + imgs.length) % imgs.length;
-    const x = imgs.slice(0, idx).reduce((w, el) => w + el.getBoundingClientRect().width, 0);
-    track.style.transform = `translateX(${-x}px)`;   // fixed backticks
+    track.style.transform = `translateX(${-idx * imgs[0].clientWidth}px)`;
     dots.forEach((d,i) => d.classList.toggle('active', i === idx));
   }
   function next(){ go(idx + 1); }
@@ -190,7 +168,7 @@
   track.addEventListener('mouseleave', () => (timer = setInterval(next, 3500)));
   window.addEventListener('load', () => go(0));
 
-  // Mailto fallback form
+  // Mailto fallback
   document.getElementById('rideForm').addEventListener('submit', e => {
     e.preventDefault();
     const f = new FormData(e.target);
@@ -203,7 +181,7 @@
     ].join('%0D%0A');
     const to = 'northstarmobilitytransport@gmail.com';
     const subj = encodeURIComponent('Ride Request from Website');
-    location.href = `mailto:${to}?subject=${subj}&body=${lines}`;  // fixed backticks
+    location.href = `mailto:${to}?subject=${subj}&body=${lines}`;
     e.target.reset();
   });
 </script>
