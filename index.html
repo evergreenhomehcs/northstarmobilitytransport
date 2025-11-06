@@ -46,14 +46,27 @@
     .card{background:var(--white);border-radius:16px;padding:1.25rem;box-shadow:0 6px 18px rgba(0,0,0,.08)}
     .card h3{margin:.2rem 0 .6rem}
 
-    /* Form */
+    /* Form & alerts */
     form{display:grid;gap:.75rem}
     input,textarea,select{width:100%;padding:.8rem;border:1px solid #d9e1ec;border-radius:10px;background:#fff}
     .btn.primary{background:var(--navy);color:#fff;border:none}
+    .alert{display:none;margin-top:.75rem;padding:.75rem;border-radius:10px}
+    .alert.success{display:block;background:#e6f7ef;color:#0b6b3a;border:1px solid #b8ead2}
+    .alert.error{display:block;background:#fdecec;color:#a40000;border:1px solid #f8b9b9}
 
     /* Footer */
     footer{background:var(--navy);color:#cbd5e1;padding:1.25rem;text-align:center;margin-top:2rem}
     .icons i{font-size:1.2rem;margin:0 .4rem}
+
+    /* Sticky quick actions */
+    .fab{
+      position:fixed;right:14px;bottom:14px;display:flex;gap:.5rem;z-index:60;
+    }
+    .fab a{
+      display:inline-flex;align-items:center;gap:.35rem;padding:.7rem .9rem;border-radius:999px;
+      background:var(--emerald);color:#fff;text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.25);font-weight:700;border:2px solid rgba(255,255,255,.25)
+    }
+    .fab a.email{background:var(--gold);color:#1b1f23}
 
     /* Responsive */
     @media (min-width:900px){
@@ -110,7 +123,6 @@
     <div class="card">
       <h3><i class="fa-solid fa-wheelchair-move"></i> Wheelchair Transport</h3>
       <p>Securements, ramps, and patient-first assistance for medical appointments, hospital discharges, dialysis, rehab, and more.</p>
-      <!-- New thumbnail using your photo -->
       <img src="images/van-rear-ramp.jpg" alt="Rear ramp access" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
@@ -133,13 +145,22 @@
 
 <section id="request" class="card" style="max-width:820px">
   <h2>Request a Ride</h2>
-  <form id="rideForm">
+
+  <!-- FormSubmit delivers to your Gmail. Mailto fallback included in JS -->
+  <form id="rideForm" method="POST" action="https://formsubmit.co/northstarmobilitytransport@gmail.com">
+    <input type="hidden" name="_subject" value="North Star | Ride Request from Website">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <!-- Optional thank-you redirect: replace with a page if you add one -->
+    <input type="hidden" name="_next" value="https://northstarmobilitytransport.com/">
+
     <input aria-label="Full name" name="name" placeholder="Full name" required>
     <input aria-label="Phone" name="phone" placeholder="Phone" required>
     <input aria-label="Pickup location" name="pickup" placeholder="Pickup location" required>
     <input aria-label="Drop-off location" name="dropoff" placeholder="Drop-off location" required>
     <textarea aria-label="Notes" name="notes" placeholder="Appointment time, mobility needs, or other notes"></textarea>
     <button class="btn primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+    <div id="formAlert" class="alert" role="status"></div>
   </form>
 </section>
 
@@ -149,15 +170,16 @@
       <h3>Contact</h3>
       <p><strong>Phone:</strong> (320) 469-7560 &nbsp;|&nbsp; (320) 492-2104<br>
          <strong>Email:</strong> northstarmobilitytransport@gmail.com</p>
-      <p><strong>Address:</strong> 16386 Ellerdale Ln, Eden Prairie, MN 55346</p>
+      <!-- Address line intentionally removed -->
       <img src="images/hero-van.jpg" alt="Contact banner" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3>Service Area</h3>
+      <p>Greater Twin Cities Metro and surrounding counties — including Minneapolis, Saint Paul, Eden Prairie, **Rochester**, and **St. Cloud**.</p>
       <iframe title="Service area map"
-        style="border:0;width:100%;height:260px;border-radius:10px"
+        style="border:0;width:100%;height:320px;border-radius:10px"
         loading="lazy" allowfullscreen
-        src="https://www.google.com/maps?q=16386%20Ellerdale%20Ln%2C%20Eden%20Prairie%2C%20MN%2055346&output=embed">
+        src="https://www.google.com/maps?ll=44.97,-93.26&z=8&t=m&output=embed">
       </iframe>
     </div>
   </div>
@@ -172,8 +194,15 @@
   <p>&copy; <span id="yr"></span> North Star Mobility Transport LLC • All rights reserved.</p>
 </footer>
 
+<!-- Sticky quick actions -->
+<div class="fab" aria-label="Quick actions">
+  <a href="tel:13204697560"><i class="fa-solid fa-phone"></i> 469-7560</a>
+  <a href="tel:13204922104"><i class="fa-solid fa-phone"></i> 492-2104</a>
+  <a class="email" href="mailto:northstarmobilitytransport@gmail.com?subject=Ride%20Request"><i class="fa-solid fa-envelope"></i> Email</a>
+</div>
+
 <script>
-  // Year
+  // Footer year
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   // Slider (auto-scroll + dots)
@@ -199,21 +228,37 @@
   track.addEventListener('mouseleave', () => (timer = setInterval(next, 3500)));
   window.addEventListener('load', () => go(0));
 
-  // Mailto fallback
-  document.getElementById('rideForm').addEventListener('submit', e => {
+  // FormSubmit delivery + mailto fallback
+  const form = document.getElementById('rideForm');
+  const alertBox = document.getElementById('formAlert');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const f = new FormData(e.target);
+    const f = new FormData(form);
+    const to = 'northstarmobilitytransport@gmail.com';
+    const subj = encodeURIComponent('Ride Request from Website');
+
+    // Prepare body for fallback
     const lines = [
       `Name: ${f.get('name')}`,
       `Phone: ${f.get('phone')}`,
       `Pickup: ${f.get('pickup')}`,
       `Drop-off: ${f.get('dropoff')}`,
       `Notes: ${f.get('notes') || ''}`
-    ].join('%0D%0A');
-    const to = 'northstarmobilitytransport@gmail.com';
-    const subj = encodeURIComponent('Ride Request from Website');
-    location.href = `mailto:${to}?subject=${subj}&body=${lines}`;
-    e.target.reset();
+    ].join('\\n');
+
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: f, mode: 'no-cors' });
+      // formsubmit returns no-cors opaque; assume success:
+      alertBox.className = 'alert success';
+      alertBox.textContent = 'Thank you — your request was sent. We will contact you shortly.';
+      form.reset();
+    } catch (err) {
+      // Fallback to mailto
+      alertBox.className = 'alert error';
+      alertBox.textContent = 'Network blocked. Opening email so you can send your request manually.';
+      location.href = `mailto:${to}?subject=${subj}&body=${encodeURIComponent(lines)}`;
+    }
   });
 </script>
 
@@ -225,15 +270,7 @@
   "name":"North Star Mobility Transport",
   "url":"https://northstarmobilitytransport.com",
   "telephone":"+1-320-469-7560",
-  "address":{
-    "@type":"PostalAddress",
-    "streetAddress":"16386 Ellerdale Ln",
-    "addressLocality":"Eden Prairie",
-    "addressRegion":"MN",
-    "postalCode":"55346",
-    "addressCountry":"US"
-  },
-  "areaServed":"Twin Cities Metro and surrounding counties",
+  "areaServed":"Greater Twin Cities Metro and surrounding counties including Minneapolis, Saint Paul, Eden Prairie, Rochester, and St. Cloud",
   "email":"northstarmobilitytransport@gmail.com"
 }
 </script>
