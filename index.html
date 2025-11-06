@@ -9,26 +9,57 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root { --navy:#002b5c; --emerald:#1e7f5c; --gold:#f5b700; --ink:#1b1f23; --paper:#f5f7fb; --white:#fff; }
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--paper)} a{color:inherit}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+    a{color:inherit}
+
+    /* Header */
     header{position:sticky;top:0;z-index:50;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem}
-    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--white)} .brand svg{height:40px;width:auto}
+    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--white)}
+    .brand svg{height:40px;width:auto}
     nav a{color:var(--white);text-decoration:none;margin-left:1rem;font-weight:600}
+
+    /* Hero */
     .hero{position:relative;background:var(--navy);color:var(--white);overflow:hidden}
     .hero-inner{max-width:1100px;margin:0 auto;padding:2.5rem 1rem;display:grid;gap:1.25rem;grid-template-columns:1fr}
-    .hero h1{margin:0;font-size:clamp(1.7rem,3vw,2.4rem)} .hero p{margin:.25rem 0 1rem;opacity:.95}
-    .cta{display:flex;flex-wrap:wrap;gap:.6rem} .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid transparent}
-    .btn.call{background:var(--emerald);color:var(--white)} .btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
-    .slider{position:relative;height:260px;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.2);background:linear-gradient(135deg,var(--navy),var(--emerald))}
+    .hero h1{margin:0;font-size:clamp(1.7rem,3vw,2.4rem)}
+    .hero p{margin:.25rem 0 1rem;opacity:.95}
+    .cta{display:flex;flex-wrap:wrap;gap:.6rem}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.1rem;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid transparent}
+    .btn.call{background:var(--emerald);color:var(--white)}
+    .btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
+
+    /* Slider */
+    .slider{
+      position:relative;height:260px;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.2);
+      background:linear-gradient(135deg,var(--navy),var(--emerald));
+    }
     .slides{display:flex;height:100%;width:max-content;transition:transform .5s ease}
     .slides img{height:100%;width:100vw;max-width:1100px;flex:0 0 100%;object-fit:cover;object-position:center}
     .dots{position:absolute;left:0;right:0;bottom:.5rem;display:flex;justify-content:center;gap:.35rem}
-    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.5)} .dot.active{background:var(--gold)}
+    .dot{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.5)}
+    .dot.active{background:var(--gold)}
+
+    /* Sections */
     section{max-width:1100px;margin:0 auto;padding:2rem 1rem}
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
-    .card{background:var(--white);border-radius:16px;padding:1.25rem;box-shadow:0 6px 18px rgba(0,0,0,.08)} .card h3{margin:.2rem 0 .6rem}
-    form{display:grid;gap:.75rem} input,textarea,select{width:100%;padding:.8rem;border:1px solid #d9e1ec;border-radius:10px;background:#fff} .btn.primary{background:var(--navy);color:#fff;border:none}
-    footer{background:var(--navy);color:#cbd5e1;padding:1.25rem;text-align:center;margin-top:2rem} .icons i{font-size:1.2rem;margin:0 .4rem}
-    @media (min-width:900px){ .hero-inner{grid-template-columns:1.1fr .9fr;align-items:center} .slider{height:320px} }
+    .card{background:var(--white);border-radius:16px;padding:1.25rem;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    .card h3{margin:.2rem 0 .6rem}
+
+    /* Form */
+    form{display:grid;gap:.75rem}
+    input,textarea,select{width:100%;padding:.8rem;border:1px solid #d9e1ec;border-radius:10px;background:#fff}
+    .btn.primary{background:var(--navy);color:#fff;border:none}
+
+    /* Footer */
+    footer{background:var(--navy);color:#cbd5e1;padding:1.25rem;text-align:center;margin-top:2rem}
+    .icons i{font-size:1.2rem;margin:0 .4rem}
+
+    /* Responsive */
+    @media (min-width:900px){
+      .hero-inner{grid-template-columns:1.1fr .9fr;align-items:center}
+      .slider{height:320px}
+    }
   </style>
 </head>
 <body>
@@ -60,15 +91,14 @@
       </div>
     </div>
 
+    <!-- Slider with your van photos -->
     <div class="slider" aria-label="Vehicle slideshow">
       <div class="slides" id="slides">
-        <img loading="lazy" src="images/hero-1.jpg" alt="North Star Mobility Transport hero">
-        <img loading="lazy" src="images/van-exterior.jpg" alt="Accessible van exterior">
-        <img loading="lazy" src="images/rear-ramp.jpg" alt="Rear ramp access">
-        <img loading="lazy" src="images/high-roof.jpg" alt="High roof van">
-        <img loading="lazy" src="images/service-wheelchair.jpg" alt="Wheelchair transport">
-        <img loading="lazy" src="images/service-door-to-door.jpg" alt="Door-to-door help">
-        <img loading="lazy" src="images/service-safety.jpg" alt="Safety standards">
+        <img loading="lazy" src="images/hero-van.jpg"               alt="North Star Mobility Transport van">
+        <img loading="lazy" src="images/van-rear-ramp.jpg"          alt="Van with rear ramp deployed">
+        <img loading="lazy" src="images/van-medical-center-1.jpg"   alt="Van at medical center">
+        <img loading="lazy" src="images/van-medical-center-2.jpg"   alt="Van at hospital">
+        <img loading="lazy" src="images/van-clinic.jpg"             alt="Van in front of clinic">
       </div>
       <div class="dots" id="dots" aria-hidden="true"></div>
     </div>
@@ -80,22 +110,23 @@
     <div class="card">
       <h3><i class="fa-solid fa-wheelchair-move"></i> Wheelchair Transport</h3>
       <p>Securements, ramps, and patient-first assistance for medical appointments, hospital discharges, dialysis, rehab, and more.</p>
-      <img src="images/service-wheelchair.jpg" alt="Wheelchair transport" style="width:100%;border-radius:10px;margin-top:.5rem">
+      <!-- New thumbnail using your photo -->
+      <img src="images/van-rear-ramp.jpg" alt="Rear ramp access" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3><i class="fa-solid fa-door-open"></i> Door-to-Door Help</h3>
       <p>From door to vehicle and into the facility—steady support from trained drivers who respect dignity and privacy.</p>
-      <img src="images/service-door-to-door.jpg" alt="Door to door help" style="width:100%;border-radius:10px;margin-top:.5rem">
+      <img src="images/van-clinic.jpg" alt="Door to door help" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3><i class="fa-solid fa-clock"></i> On-Time & Reliable</h3>
       <p>Clear ETAs and communication. We plan routes to keep you on schedule.</p>
-      <img src="images/service-on-time.jpg" alt="On-time and reliable" style="width:100%;border-radius:10px;margin-top:.5rem">
+      <img src="images/van-medical-center-1.jpg" alt="On-time and reliable" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3><i class="fa-solid fa-shield-heart"></i> Safety Standards</h3>
       <p>Daily vehicle inspections, clean interiors, and securement procedures aligned with MnDOT STS requirements.</p>
-      <img src="images/service-safety.jpg" alt="Safety standards" style="width:100%;border-radius:10px;margin-top:.5rem">
+      <img src="images/van-medical-center-2.jpg" alt="Safety standards" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
   </div>
 </section>
@@ -119,7 +150,7 @@
       <p><strong>Phone:</strong> (320) 469-7560 &nbsp;|&nbsp; (320) 492-2104<br>
          <strong>Email:</strong> northstarmobilitytransport@gmail.com</p>
       <p><strong>Address:</strong> 16386 Ellerdale Ln, Eden Prairie, MN 55346</p>
-      <img src="images/contact-banner.jpg" alt="Contact banner" style="width:100%;border-radius:10px;margin-top:.5rem">
+      <img src="images/hero-van.jpg" alt="Contact banner" style="width:100%;border-radius:10px;margin-top:.5rem">
     </div>
     <div class="card">
       <h3>Service Area</h3>
@@ -136,7 +167,7 @@
   <div class="icons" aria-label="Social links">
     <i class="fa-brands fa-facebook"></i>
     <i class="fa-brands fa-instagram"></i>
-    <i class="fa-brands fa-linkedIn"></i>
+    <i class="fa-brands fa-linkedin"></i>
   </div>
   <p>&copy; <span id="yr"></span> North Star Mobility Transport LLC • All rights reserved.</p>
 </footer>
